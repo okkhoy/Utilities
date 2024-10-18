@@ -25,4 +25,18 @@ public class StringParser {
 
         return stringParts;
     }
+
+    /** Removes additional spaces in between strings
+     * A    Quick   Brown    Fox --> A Quick Brown Fox
+     * @param stringToTrim the string to be trimmed
+     * @return a string with single space between words
+     * @throws org.utils.exceptions.InvalidStringInputException defined in the exception package
+     */
+    public String trimString(String stringToTrim) throws InvalidStringInputException {
+        if (stringToTrim == null) {
+            throw new InvalidStringInputException();
+        }
+        String trimmedString = stringToTrim.replaceAll("\\s+", " ");
+        return trimmedString;
+    }
 }

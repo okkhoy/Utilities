@@ -8,6 +8,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class StringParserTest {
 
+
     // Test method naming
     // methodBeingTested_input_expectedOutcome
     @Test
@@ -29,6 +30,13 @@ class StringParserTest {
 //        List<String> stringParts = stringParser.splitString(inputString, separator);
 //        assertEquals(0, stringParts.size());
         assertThrows(InvalidStringInputException.class,
-                () -> stringParser.splitString(inputString,separator));
+                () -> stringParser.splitString(inputString, separator));
+    }
+
+    @Test
+    void trimString_validInput_expectTrimmed() throws InvalidStringInputException {
+        StringParser sp = new StringParser();
+        String inputString = "This    string    contains more    spaces     than    needed";
+        assertEquals("This string contains more spaces than needed", sp.trimString(inputString));
     }
 }

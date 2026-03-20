@@ -1,0 +1,46 @@
+package org.utils.stringutils;
+
+import org.junit.jupiter.api.Test;
+import org.utils.exceptions.InvalidStringInputException;
+
+import java.util.ArrayList;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
+class StringParserTest {
+
+    // 3 parts
+    // methodName_whatIsTheConditionYouAreTesting_Outcome
+    @Test
+    void splitString_oneSeparator_expectTwoParts() throws InvalidStringInputException {
+        StringParser sp = new StringParser();
+        String inputString = "Hello|World";
+        String separator = "\\|";
+
+        ArrayList<String> partOfString = sp.splitString(inputString, separator);
+
+        assertEquals(2, partOfString.size());
+    }
+
+    @Test
+    void splitString_nullInput_expectException()
+            throws InvalidStringInputException {
+        StringParser sp = new StringParser();
+        String inputString = null;
+        String separator = "\\|";
+
+        // ArrayList<String> partOfString = sp.splitString(inputString,separator);
+        // assertEquals(0, partOfString.size());
+        assertThrows(InvalidStringInputException.class,
+                () -> sp.splitString(inputString, separator));
+    }
+
+    @Test
+    void trimString_validInput_expectTrimmed() throws InvalidStringInputException {
+        StringParser sp = new StringParser();
+        String inputString = "This    string    contains more    spaces     than    needed";
+        assertEquals("This string contains more spaces than needed", sp.trimString(inputString));
+    }
+
+}
